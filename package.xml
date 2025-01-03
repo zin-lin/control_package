@@ -3,7 +3,7 @@
 <package format="3">
   <name>control_package</name>
   <version>0.0.0</version>
-  <description>Controlling the robot via a controlled environment, i.e. a terminal or a server</description>
+  <description>Controlling the robot via a controlled environment, a terminal or a server</description>
   <maintainer email="zinlinhtun34@gmail.com">zin</maintainer>
   <license>TODO: License declaration</license>
 

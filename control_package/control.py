@@ -18,12 +18,12 @@ TORQUE_ADDR = 64
 POSITION_ADDR = 116
 
 
-class VehicleControl(Node):
+class Control(Node):
     mode = MODE["REAL"]
     op_mode = OP_MODE["SPIDER"]
 
     def __init__(self):
-        super().__init__('control_unit')
+        super().__init__('control')
         self.publisher_ = self.create_publisher(Con2vcu, 'control', 10)
         self.mode = OP_MODE['SPIDER']
 
@@ -52,18 +52,18 @@ def terminal_app(node):
 def main(args=None):
     rclpy.init(args=args)
 
-    vehicle_control = VehicleControl()
+    con = Control()
     try:
         # Start the command-line interface
-        terminal_app(vehicle_control)
+        terminal_app(con)
     except KeyboardInterrupt:
         print("\nApplication interrupted using Ctrl+C")
-    rclpy.spin(vehicle_control)
+    rclpy.spin(con)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    vehicle_control.destroy_node()
+    con.destroy_node()
     rclpy.shutdown()
 
 

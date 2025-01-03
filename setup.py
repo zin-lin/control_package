@@ -18,12 +18,12 @@ setup(
     zip_safe=True,
     maintainer='zin',
     maintainer_email='zinlinhtun34@gmail.com',
-    description='Controlling the robot via a controlled environment, i.e. a terminal or a server',
+    description='Control Vehicle through terminal or server',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'control=control_package.control:main'
+            'terminal_control=control_package.control:main'
         ],
     },
 )
