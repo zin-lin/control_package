@@ -1,4 +1,4 @@
-# Author : Zin Lin Htun
+# Author: Zin Lin Htun
 
 
 import time
@@ -44,8 +44,10 @@ def terminal_app(node):
             node.execute(2.0)
         elif cmd == "d":
             node.execute(3.0)
-        else:
+        elif cmd == "s":
             node.execute(4.0)
+        else:
+            node.execute(5.0)
 
 
 # main method
