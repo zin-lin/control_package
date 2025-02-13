@@ -24,7 +24,7 @@ class Control(Node):
 
     def __init__(self):
         super().__init__('control')
-        self.publisher_ = self.create_publisher(Con2vcu, 'control', 10)
+        self.publisher_ = self.create_publisher(Con2vcu, 'adsmt/manual_control', 10)
         self.mode = OP_MODE['SPIDER']
 
     def execute(self, cmd):
@@ -46,8 +46,16 @@ def terminal_app(node):
             node.execute(3.0)
         elif cmd == "s":
             node.execute(4.0)
-        else:
+        elif cmd == "jf":
             node.execute(5.0)
+        elif cmd == "df":
+            node.execute(6.0)
+        elif cmd == "dr":
+            node.execute(7.0)
+        elif cmd == "dl":
+            node.execute(8.0)
+        else:
+            node.execute(9.0)
 
 
 # main method
