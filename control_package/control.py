@@ -54,8 +54,14 @@ def terminal_app(node):
             node.execute(7.0)
         elif cmd == "dl":
             node.execute(8.0)
-        else:
+        elif cmd == "hf":
             node.execute(9.0)
+        elif cmd == "hr":
+            node.execute(10.0)
+        elif cmd == "hl":
+            node.execute(11.0)
+        else:
+            node.execute(20.0)
 
 
 # main method
