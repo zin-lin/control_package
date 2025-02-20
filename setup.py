@@ -3,6 +3,8 @@ import os
 from glob import glob
 
 package_name = 'control_package'
+launch = 'launch'
+imgs = 'control_package/imgs'
 
 setup(
     name=package_name,
@@ -12,7 +14,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name, glob(os.path.join('launch', '*_launch.*'))),
+        ('share/' + package_name, glob(os.path.join('launch', '*launch.py'))),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -23,7 +25,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'terminal_control=control_package.control:main'
+            'terminal_control=control_package.control:main',
+            'app=control_package.gui_control:main'
         ],
     },
 )
