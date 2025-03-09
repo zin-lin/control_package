@@ -53,7 +53,7 @@ class ControlGUI(tk.Tk):
 
         # Set window size
         self.window_width = 600
-        self.window_height = 400
+        self.window_height = 378
 
         # Calculate position to center the window
         x_position = (screen_width // 2) - (self.window_width // 2)
@@ -65,22 +65,28 @@ class ControlGUI(tk.Tk):
         self.control_node.logger.info(self.winfo_name())
         self._initialise_gui_widgets()
 
-    def get_pos(self,event):
-        x_win = self.winfo_x()
-        y_win = self.winfo_y()
-        start_x = event.x_root
-        start_y = event.y_root
 
-        ywin = y_win - start_y
-        xwin = x_win - start_x
+    def _dup (self, event):
+        self.send_command(6.0) # drive forward
 
-        def move_window(event_in):
-            self.geometry("600x400" + '+{0}+{1}'.format(event_in.x_root + xwin, event_in.y_root + ywin))
+    def _dright (self, event):
+        self.send_command(7.0) # drive right
 
-        start_x = event.x_root
-        start_y = event.y_root
+    def _dleft (self, event):
+        self.send_command(8.0) # drive left
 
-        self.bind('<B1-Motion>', move_window)
+    def _wfor (self, event):
+        self.send_command(1.0) # walk forward
+
+    def _wright (self, event):
+        self.send_command(3.0) # turn right
+
+    def _wleft (self, event):
+        self.send_command(2.0) # turn left
+
+    # stop
+    def _stop (self, event):
+        self.send_command(20.0) # turn left
 
 
     def _move_window(self, event):
@@ -90,30 +96,16 @@ class ControlGUI(tk.Tk):
     def _initialise_gui_widgets(self):
         self.configure(bg=BG)
         # kill default title bar
-        self.overrideredirect(True)
+        # self.overrideredirect(True)
 
-        # lay out necessary widgets
-
-        # make a ADS-Mt Titlebar
-        title_bar = Frame(self, bg=BG,highlightthickness=0, borderwidth=0,)
-        title_bar.pack(fill=X, side=TOP)
-        # put a close button on the title bar
-        close_button =Button(title_bar, text='[X]', command=self.destroy, width=10, foreground='#703b46',highlightthickness=0, borderwidth=0,bd=0, bg= BG, activebackground=BG, activeforeground='#ff5757')
-        close_button.pack(side=RIGHT, padx=5, pady=5)
-
-        # Load the icon
-        icon_label = Label(title_bar, image=self.photo, width=20, height=20, highlightthickness=0, bg=BG, foreground="#aaa", borderwidth=0,)
-        icon_label.pack(side="left", padx=10)
-
-        # Add Title
-        label = Label(title_bar, text="Control-Package: ADS-MT", font=("Consolas", 9, 'bold'), highlightthickness=0, bg=BG, foreground="#60627a")
-        label.pack(side="left", padx=10)
+        self.resizable(False, False)
 
         # bind to move around
-        self.bind('<Button-1>', self.get_pos)
+        # self.bind('<Button-1>', self.get_pos)
 
         self.label = Label(self, text=f"Current Command: {self.mode}", bg = BG, fg="#703b46",)
         self.label.pack(side=TOP, fill=BOTH, padx=5, pady=5)
+
 
         button = Button(self, text="walk straight ^", command= lambda: self.send_command(1.0), height=2, width=22, bg='#1b1824', fg="#703b46", bdcolor="#703b46",
                         bd= 2,  activebackground='#131119',  activeforeground='#eee', highlightthickness=0, font=("Terminal", 9),
@@ -149,6 +141,24 @@ class ControlGUI(tk.Tk):
                         bd= 2,  activebackground='#131119',  activeforeground='#eee', highlightthickness=0,font=("Terminal", 9),
                         )
         button.pack(padx=5, pady=5)
+        self.self_bind()
+
+    def self_bind(self):
+        self.focus_set()
+        # drive-
+        self.bind('<Up>', self._dup)
+        # self.bind('<Down>', self.get_pos)
+        self.bind('<Right>', self._dright)
+        self.bind('<Left>', self._dleft)
+
+        # walk
+        self.bind('<w>', self._wfor)
+        # self.bind('<Down>', self.get_pos)
+        self.bind('<a>', self._wleft)
+        self.bind('<d>', self._wright)
+
+        # stop
+        self.bind('<space>', self._stop)
 
     def send_command(self, command):
         """Send command to ROS 2 node and update UI."""
