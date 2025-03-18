@@ -16,7 +16,7 @@ def generate_launch_description():
     # use robot state publisher
     terminal_node = Node(
         package='control_package',
-        executable='terminal',
+        executable='terminal_control',
         output='screen',
 
     )
