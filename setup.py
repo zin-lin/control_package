@@ -26,7 +26,8 @@ setup(
     entry_points={
         'console_scripts': [
             'terminal_control=control_package.control:main',
-            'app=control_package.gui_control:main'
+            'app=control_package.gui_control:main',
+            'rolle=control_package.rolle_gui_control:main'
         ],
     },
 )
