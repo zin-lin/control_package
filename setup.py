@@ -27,7 +27,13 @@ setup(
         'console_scripts': [
             'terminal_control=control_package.control:main',
             'app=control_package.gui_control:main',
-            'rolle=control_package.rolle_gui_control:main'
+            'rolle=control_package.rolle_gui_control:main',
+            'bev=control_package.bev:main',
+            'bevpo=control_package.bevpo:main',
+            'l2=control_package.l2:main',
+            'rec_depth=control_package.rec_depth:main',
+            'rec_rgb=control_package.rec_rgb:main',
+            'rec_pc2=control_package.rec_pc2:main',
         ],
     },
 )
